@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const techCardDataFetch = async (): Promise<TTechCard[]> => {
-  const res = await fetch('/data.json');
+  const res = await fetch('./data.json');
   const data = await res.json();
   return data;
 };
