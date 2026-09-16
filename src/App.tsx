@@ -4,6 +4,7 @@ import TechCard from "./components/Explore_The_Technologies/TechCard.tsx";
 import { Suspense } from "react";
 import type { TTechCard } from "./types/techDataType.ts";
 
+import LoadingSpinner from "./components/LoadingSpinner.tsx";
 
 // React-Toastify imports
 import { ToastContainer } from "react-toastify";
@@ -26,7 +27,8 @@ function App() {
     <>
       <Nav />
       <Hero/>
-      <Suspense fallback={<p>Loading...</p>}>
+
+      <Suspense fallback={<LoadingSpinner />}>
         <TechCard techCardPromise={techCardPromise} />
       </Suspense>
 
