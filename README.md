@@ -1,75 +1,75 @@
-# React + TypeScript + Vite
+# Dev Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive web application designed to help software engineers explore, compare, and build their ideal technology stack.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About the Project
 
-## React Compiler
+**Dev Stack** provides developers with a streamlined platform to evaluate software tools across frontend, backend, databases, and DevOps categories. Users can pick technologies, prevent duplicate additions, and visualize their custom project stack in real-time.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Built With
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Frontend Library:** [React 19](https://react.dev/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Build Tool:** [Vite](https://vitejs.dev/)
+* **Styling Framework:** [Tailwind CSS v4](https://tailwindcss.com/) & [DaisyUI](https://daisyui.com/)
+* **Notifications:** [React-Toastify](https://fkhadra.github.io/react-toastify/)
+* **Data Delivery:** Local JSON with React `use()` hook & `<Suspense>` data fetching
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Key Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Interactive Stack Builder**  
+   Add or remove tools from your active stack with real-time state tracking and instant notification feedback via `React-Toastify` for additions, removals, and duplicate attempts.
 
-```
+2. **Custom Badging & Metadata Display**  
+   Explore tech items categorized by difficulty, rating, and dynamically styled badges for fast visual recognition.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Centralized Gradient Theme & Fully Responsive UI**  
+   Styled using a single-variable CSS gradient system for quick global re-theming, paired with a mobile-first responsive layout across all device sizes.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 
-```
+**1. What is JSX, and why is it used in React?**
+
+* **What it is:** JSX stands for JavaScript XML. It is a syntax extension that lets you write HTML-like code directly inside your JavaScript files.
+* **Why it's used:** It makes UI structure readable and easy to write by combining layout markup and display logic in one place, which React then converts into standard DOM elements.
+
+**2. What is the difference between props and state?**
+
+* **Props (Properties):** Read-only data passed from a parent component down to a child component. The child component cannot modify props directly.
+* **State:** Local data managed inside a component that can change over time based on user actions. When state updates, React automatically re-renders the component to show the new data.
+
+**3. What does the `useState` hook do, and where did you use it in this project?**
+
+* **What it does:** It allows functional components to create, read, and update local state variables.
+* **Where used:** In `TechCard.tsx`, `useState` was used to hold the list of selected technologies in my custom stack (`const [stack, setStack] = useState<TTechCard[]>([])`).
+
+**4. What does the `useEffect` hook do, and why did you need it to load the JSON data?**
+
+* **What it does:** It handles "side effects"—operations that run outside of rendering, such as fetching data, updating DOM titles, or setting up timers.
+* **Why needed:** Because loading JSON data is an asynchronous network operation. `useEffect` ensures the fetch call triggers automatically when the component mounts without blocking the initial UI render or causing infinite re-render loops.
+
+**5. Why does every item in a `.map()` list need a unique `key` prop?**
+
+* **Reason:** React's Virtual DOM uses the `key` prop to identify exactly which items in a list have been added, updated, or removed. This avoids unnecessary re-renders and prevents UI state bugs when items are reordered or deleted.
+
+**6. What is conditional rendering? Show one place you used it.**
+
+* **Definition:** Showing or hiding specific UI elements based on a JavaScript condition (true or false).
+* **Project Example:** Changing the button text and style dynamically based on whether an item is already added:
+---tsx code---
+{isAdded ? "✓ Added to Stack" : "Add to Stack"}
+---tsx code---
+
+Another example is checking if `stack.length === 0` to display an "Empty Stack" message instead of the list of added technologies.
+
+**7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?**
+
+* **Parent → Child:** Pass data directly down as props (example: passing `stack={stack}` from `TechCard` to `YourStacks`).
+* **Child → Parent:** Pass a callback function as a prop from the parent (example: `onRemove={handleRemove}`). When an event happens in the child (like clicking a delete button), the child calls that function and passes data back up to the parent as an argument (`onRemove(tech.id)`).
