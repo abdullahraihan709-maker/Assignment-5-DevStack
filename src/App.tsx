@@ -6,6 +6,8 @@ import type { TTechCard } from "./types/techDataType.ts";
 
 import LoadingSpinner from "./components/LoadingSpinner.tsx";
 
+import Footer from "./components/Footer.tsx";
+
 // React-Toastify imports
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,6 +36,8 @@ function App() {
 
       {/* Global Toast Notification Container */}
       <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} theme="light" />
+
+      <Footer/>
     </>
   )
 }
