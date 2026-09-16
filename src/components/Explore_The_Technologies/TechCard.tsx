@@ -3,6 +3,7 @@ import { use, useState } from "react";
 
 import type { TTechCard } from "../../types/techDataType";
 
+import YourStacks from "./YourStacks";
 
 interface TechCardProps {
     techCardPromise: Promise<TTechCard[]>
@@ -24,6 +25,17 @@ const TechCard = ({ techCardPromise }: TechCardProps) => {
         }
         setStack([...stack, tech]);
     };
+
+    // Function to remove a single technology
+    const handleRemove = (id: string) => {
+        setStack(stack.filter(item => item.id !== id));
+    };
+
+    // Function to clear the whole stack
+    const handleRemoveAll = () => {
+        setStack([]);
+    };
+
 
 
 
@@ -111,6 +123,16 @@ const TechCard = ({ techCardPromise }: TechCardProps) => {
                     </div>
                 </div>
                 {/* Left Side: Technology Grid End */}
+
+
+
+
+                {/* Right Side: Sidebar (YourStacks) Component Start */}
+                <div className="lg:w-1/3 xl:w-1/4 w-full sticky top-24">
+                    <YourStacks stack={stack} onRemove={handleRemove} onRemoveAll={handleRemoveAll} />
+                </div>
+                {/* Right Side: Sidebar (YourStacks) Component End */}
+
 
             </div>
             {/* Main Section Content End */}
