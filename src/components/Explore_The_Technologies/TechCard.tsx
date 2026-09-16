@@ -1,6 +1,8 @@
 
 import { use, useState } from "react";
 
+import { toast } from "react-toastify";
+
 import type { TTechCard } from "../../types/techDataType";
 
 import YourStacks from "./YourStacks";
@@ -20,20 +22,27 @@ const TechCard = ({ techCardPromise }: TechCardProps) => {
     const handleAdd = (tech: TTechCard) => {
         const isDuplicate = stack.find(item => item.id === tech.id);
         if (isDuplicate) {
-            alert("This technology is already in your stack!");
+            toast.warning(`${tech.name} is already in your stack!`);
             return;
         }
         setStack([...stack, tech]);
+        toast.success(`Added ${tech.name} to your stack!`);
     };
 
     // Function to remove a single technology
     const handleRemove = (id: string) => {
+        const removedItem = stack.find(item => item.id === id);
         setStack(stack.filter(item => item.id !== id));
+        if (removedItem) {
+            toast.info(`Removed ${removedItem.name} from stack.`);
+        }
+
     };
 
     // Function to clear the whole stack
     const handleRemoveAll = () => {
         setStack([]);
+        toast.error("Cleared all items from your stack.");
     };
 
 
