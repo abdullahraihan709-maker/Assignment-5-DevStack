@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+@layer utilities {
+  :root {
+    /* Centralized theme gradient: Orange → Pink → Violet */
+    --brand-gradient: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+  }
+
+  .bg-brand-gradient {
+    background-image: var(--brand-gradient);
+  }
+
+  .text-brand-gradient {
+    background-image: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
